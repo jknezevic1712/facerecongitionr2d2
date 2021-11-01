@@ -7,7 +7,8 @@ body {
   font-family: -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+  background: #46afa6;
+  background-repeat: repeat;
   font-family: "Courier New", Courier, monospace;
   z-index: 999;
 }

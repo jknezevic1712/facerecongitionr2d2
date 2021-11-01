@@ -7,7 +7,7 @@ const ImageLinkForm = ({ onInputChange, onPictureSubmit }) => {
       <p className="f3">
         {"Our friend R2-D2 will detect faces in your pictures. Give it a try!"}
       </p>
-      <caption>{`Please use "https" links ending with image format (jpg, png, etc...)`}</caption>
+      <p>{`Please use "https" links ending with image format (jpg, png, etc...)`}</p>
       <div className="center">
         <div className="zIndex form center pa4 br3 shadow-5">
           <input

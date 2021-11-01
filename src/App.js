@@ -154,15 +154,6 @@ class App extends Component {
                     entries: count,
                   })
                 );
-                /* 
-                ! This below would change the entire object, so there would be only entries in user object
-                ! Use code above to only update one object property without deleting other props
-                */
-                // this.setState({
-                //   user: {
-                //     entries: count,
-                //   },
-                // });
               })
               .catch((err) => console.log("Error occurred!"));
           }

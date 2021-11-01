@@ -7,12 +7,7 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 import Particles from "react-tsparticles";
-import Clarifai from "clarifai";
 import "./App.css";
-
-const app = new Clarifai.App({
-  apiKey: "fd326bdcdf5f4a47b666d9b7946a2dbb",
-});
 
 const particlesOptions = {
   fpsLimit: 60,
@@ -75,23 +70,25 @@ const particlesOptions = {
   detectRetina: true,
 };
 
+const initialState = {
+  input: "",
+  imageUrl: "",
+  box: {},
+  route: "signin",
+  isSignedIn: false,
+  user: {
+    id: "",
+    name: "",
+    email: "",
+    entries: "0",
+    joined: "",
+  },
+};
+
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: "",
-      imageUrl: "",
-      box: {},
-      route: "signin",
-      isSignedIn: false,
-      user: {
-        id: "",
-        name: "",
-        email: "",
-        entries: 0,
-        joined: "",
-      },
-    };
+    this.state = initialState;
   }
 
   loadUser = (data) => {
@@ -129,44 +126,55 @@ class App extends Component {
   };
 
   onPictureSubmit = () => {
-    this.setState({ imageUrl: this.state.input });
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then((response) => {
-        if (response) {
-          fetch("http://localhost:3001/image", {
-            method: "put",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              id: this.state.user.id,
-            }),
-          })
-            .then((response) => response.json())
-            .then((count) => {
-              this.setState(
-                Object.assign(this.state.user, {
-                  entries: count,
-                })
-              );
-              /* 
-              ! This below would change the entire object, so there would be only entries in user object
-              ! Use code above to only update one object property without deleting other props
-              */
-              // this.setState({
-              //   user: {
-              //     entries: count,
-              //   },
-              // });
-            });
-        }
-        this.displayFaceBox(this.calculateFaceLocation(response));
+    if (this.state.input === "") {
+      return "Please enter image url!";
+    } else {
+      this.setState({ imageUrl: this.state.input });
+      fetch("http://localhost:3001/imageurl", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          input: this.state.input,
+        }),
       })
-      .catch((err) => console.log(err));
+        .then((response) => response.json())
+        .then((response) => {
+          if (response) {
+            fetch("http://localhost:3001/image", {
+              method: "put",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                id: this.state.user.id,
+              }),
+            })
+              .then((response) => response.json())
+              .then((count) => {
+                this.setState(
+                  Object.assign(this.state.user, {
+                    entries: count,
+                  })
+                );
+                /* 
+                ! This below would change the entire object, so there would be only entries in user object
+                ! Use code above to only update one object property without deleting other props
+                */
+                // this.setState({
+                //   user: {
+                //     entries: count,
+                //   },
+                // });
+              })
+              .catch((err) => console.log("Error occurred!"));
+          }
+          this.displayFaceBox(this.calculateFaceLocation(response));
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   onRouteChange = (route) => {
     if (route === "signout") {
-      this.setState({ isSignedIn: false });
+      this.setState(initialState);
     } else if (route === "home") {
       this.setState({ isSignedIn: true });
     }
@@ -204,7 +212,7 @@ class App extends Component {
             onRouteChange={this.onRouteChange}
           />
         ) : (
-          <Signin onRouteChange={this.onRouteChange} />
+          <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         )}
       </div>
     );

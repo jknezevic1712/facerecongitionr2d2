@@ -17,7 +17,7 @@ const ImageLinkForm = ({ onInputChange, onPictureSubmit }) => {
           />
           <button
             style={{
-              backgroundColor: "#46afa6",
+              backgroundColor: "#3ca096",
             }}
             className="w-30 grow f4 link ph3 pv2 dib white"
             onClick={onPictureSubmit}

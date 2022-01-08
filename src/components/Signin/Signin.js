@@ -41,7 +41,7 @@ class Signin extends React.Component {
     return (
       <article
         className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center"
-        style={{ backgroundColor: "#378c82" }}
+        style={{ backgroundColor: "#3ca096" }}
       >
         <main className="pa4 black-80">
           <div className="measure">
@@ -77,7 +77,7 @@ class Signin extends React.Component {
                 onClick={this.onSubmitSignIn}
                 className="b ph3 pv2 input-reset ba b--black grow pointer f6 dib"
                 type="submit"
-                style={{ backgroundColor: "#3ca096" }}
+                style={{ backgroundColor: "#46afa6" }}
                 value="Sign in"
               />
             </div>

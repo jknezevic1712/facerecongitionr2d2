@@ -23,7 +23,6 @@ class Register extends React.Component {
   };
 
   onSubmitSignIn = () => {
-    // fetch("https://git.heroku.com/damp-basin-68251/register", {
     fetch("https://damp-basin-68251.herokuapp.com/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -47,7 +46,10 @@ class Register extends React.Component {
       this;
 
     return (
-      <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+      <article
+        className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center"
+        style={{ backgroundColor: "#3ca096" }}
+      >
         <main className="pa4 black-80">
           <div className="measure">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
@@ -58,7 +60,7 @@ class Register extends React.Component {
                 </label>
                 <input
                   onChange={onNameChange}
-                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="pa2 input-reset ba w-100"
                   type="text"
                   name="name"
                   id="name"
@@ -70,7 +72,7 @@ class Register extends React.Component {
                 </label>
                 <input
                   onChange={onEmailChange}
-                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="pa2 input-reset ba w-100"
                   type="email"
                   name="email-address"
                   id="email-address"
@@ -82,7 +84,7 @@ class Register extends React.Component {
                 </label>
                 <input
                   onChange={onPasswordChange}
-                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  className="b pa2 input-reset ba w-100"
                   type="password"
                   name="password"
                   id="password"
@@ -94,6 +96,7 @@ class Register extends React.Component {
                 onClick={onSubmitSignIn}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
+                style={{ backgroundColor: "#46afa6" }}
                 value="Register"
               />
             </div>

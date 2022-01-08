@@ -6,69 +6,7 @@ import Rank from "./components/Rank/Rank";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
-import Particles from "react-tsparticles";
 import "./App.css";
-
-const particlesOptions = {
-  fpsLimit: 60,
-  interactivity: {
-    detectsOn: "canvas",
-    events: {
-      onClick: {
-        enable: true,
-        mode: "repulse",
-      },
-      resize: true,
-    },
-    modes: {
-      repulse: {
-        distance: 200,
-        duration: 0.4,
-      },
-    },
-  },
-  particles: {
-    color: {
-      value: "#ffffff",
-    },
-    links: {
-      color: "#ffffff",
-      distance: 150,
-      enable: true,
-      opacity: 0.5,
-      width: 1,
-    },
-    collisions: {
-      enable: true,
-    },
-    move: {
-      direction: "none",
-      enable: true,
-      outMode: "bounce",
-      random: false,
-      speed: 3,
-      straight: false,
-    },
-    number: {
-      density: {
-        enable: true,
-        value_area: 800,
-      },
-      value: 70,
-    },
-    opacity: {
-      value: 1.5,
-    },
-    shape: {
-      type: "line",
-    },
-    size: {
-      random: true,
-      value: 3,
-    },
-  },
-  detectRetina: true,
-};
 
 const initialState = {
   input: "",
@@ -176,11 +114,6 @@ class App extends Component {
     const { isSignedIn, imageUrl, route, box, user } = this.state;
     return (
       <div className="App">
-        <Particles
-          id="tsparticles"
-          options={particlesOptions}
-          className="particles"
-        />
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
